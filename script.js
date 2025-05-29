@@ -1,6 +1,6 @@
 console.log("Welcome to Spotify");
 
-// Initialize the Variables
+
 let songIndex = 0;
 let audioElement = new Audio("Salaam e ishq kbps.mp3");
 let masterplay = document.getElementById("masterplay");
