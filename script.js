@@ -8,7 +8,7 @@ let myProgressBar = document.getElementById("myProgressBar");
 let gif = document.getElementById("gif");
 let songItems = Array.from(document.getElementsByClassName("songItem"));
 let songs = [
-    {songName: "Salaam e ishq", filePath: "Salaam e ishq kbps.mp3", coverPath: "songs.mp3"},
+    {songName: "Salaam e ishq", filePath: "Salaam e ishq kbps.mp3", coverPath: "cover/1.mp3"},
     {songName: "Salam-e-Ishq", filePath: "song/1.mp3", coverPath: "cover/2.jpg"},
     {songName: "Salam-e-Ishq", filePath: "song/1.mp3", coverPath: "cover/3.jpg"},
     {songName: "Salam-e-Ishq", filePath: "song/1.mp3", coverPath: "cover/4.jpg"},
@@ -20,9 +20,13 @@ let songs = [
     {songName: "Salam-e-Ishq", filePath: "song/1.mp3", coverPath: "cover/10.jpg"},
 ]
 
-songItems.forEach((element)=> {
+songItems.forEach((element, i) => {
     console.log(element, i);
-    element.getElementsByClassName("img")[0].src = songs[i].coverPath;
+
+    element.getElementsByTagName("img")[0].src = songs[i].coverPath;
+
+    element.getElementsByClassName("songName")[0].innerText =
+        songs[i].songName;
 });
 
 // audioElement.play();
