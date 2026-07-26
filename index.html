@@ -3,92 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotify</title>
+    <title>Spotify Pro - Global Premium Player</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li class="brand"><img src="logo.png" alt="Spotify">Spotify</li>
-            <li>Home</li>
-            <li>About</li>
-        </ul>
-    </nav>
-
-    <div class="container">
-        <div class="songlist">
-            <h1>Best of NCS - No Copyright Sounds</h1>
-            <div class="songitemcontainer">
-                <div class="songItem">
-                    <img src="cover.jpg" alt="1" width="100px">
-                    <span class="songName">A</span>
-                    <span class="songlistplay"><span class="timestamp">05:34 <i class="far fa-play-circle"></i></span></span>
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="logo" style="display: flex; align-items: center; gap: 12px; padding-left: 10px;">
+                <img src="https://cdn-icons-png.flaticon.com/512/3844/3844724.png" alt="Kyzo Logo" style="width: 35px; height: 35px;">
+                 <span style="font-size: 26px; font-weight: 800; letter-spacing: -1px; color: #00f2ff;">Kyzo</span>
+            </div>
+            <div class="nav-links">
+                <div class="nav-item active" onclick="loadFullTracks()">
+                    <i class="fas fa-home"></i> <span data-i18n="home">Home</span>
                 </div>
-                <div class="songItem">
-                    <img src="cover.jpg" alt="1" width="100px">
-                    <span class="songName">B</span>
-                    <span class="songlistplay"><span class="timestamp">05:34 <i class="far fa-play-circle"></i></span></span>
+                <div class="nav-item" onclick="searchGlobal('New Global Hits')">
+                    <i class="fas fa-compass"></i> <span data-i18n="discover">Discover</span>
                 </div>
-                <div class="songItem">
-                    <img src="cover.jpg" alt="1" width="100px">
-                    <span class="songName">C</span>
-                    <span class="songlistplay"><span class="timestamp">03:40 <i class="far fa-play-circle"></i></span></span>
+                <div class="nav-item" onclick="searchGlobal('Billboard Top 100')">
+                    <i class="fas fa-chart-line"></i> <span data-i18n="topCharts">Top Charts</span>
                 </div>
-                <div class="songItem">
-                    <img src="cover.jpg" alt="1" width="100px">
-                    <span class="songName">D</span>
-                    <span class="songlistplay"><span class="timestamp">04:30 <i class="far fa-play-circle"></i></span></span>
-                </div>
-                <div class="songItem">
-                    <img src="cover.jpg" alt="1" width="100px">
-                    <span class="songName">E</span>
-                    <span class="songlistplay"><span class="timestamp">06:04 <i class="far fa-play-circle"></i></span></span>
-                </div>
-
-                <div class="songItem">
-                    <img src="cover.jpg" alt="1" width="100px">
-                    <span class="songName">F</span>
-                    <span class="songlistplay"><span class="timestamp">04:34 <i class="far fa-play-circle"></i></span></span>
-                </div>
-                <div class="songItem">
-                    <img src="cover.jpg" alt="1" width="100px">
-                    <span class="songName">G</span>
-                    <span class="songlistplay"><span class="timestamp">02:04 <i class="far fa-play-circle"></i></span></span>
-                </div>
-                <div class="songItem">
-                    <img src="cover.jpg" alt="1" width="100px">
-                    <span class="songName">H</span>
-                    <span class="songlistplay"><span class="timestamp">05:34 <i class="far fa-play-circle"></i></span></span>
-                </div>
-                <div class="songItem">
-                    <img src="cover.jpg" alt="1" width="100px">
-                    <span class="songName">I</span>
-                    <span class="songlistplay"><span class="timestamp">05:34 <i class="far fa-play-circle"></i></span></span>
-                </div>
-                <div class="songItem">
-                    <img src="cover.jpg" alt="1" width="100px">
-                    <span class="songName">J</span>
-                    <span class="songlistplay"><span class="timestamp">05:34 <i class="far fa-play-circle"></i></span></span>
+                <div class="nav-item" onclick="showLibrary()">
+                    <i class="fas fa-book"></i> <span data-i18n="library">Your Library</span>
                 </div>
             </div>
+            
+            <div class="sidebar-section scrollable-genres">
+                <p class="section-title" data-i18n="genres">GLOBAL GENRES</p>
+                <div class="cat-item" onclick="searchGlobal('Bollywood')">🇮🇳 Bollywood</div>
+                <div class="cat-item" onclick="searchGlobal('K-Pop')">🇰🇷 K-Pop</div>
+                <div class="cat-item" onclick="searchGlobal('Rock Full Songs')">🎸 Rock</div>
+                <div class="cat-item" onclick="searchGlobal('Punjabi Hits')">🔥 Punjabi</div>
+                <div class="cat-item" onclick="searchGlobal('EDM Mix')">⚡ EDM</div>
+                <div class="cat-item" onclick="searchGlobal('Lo-fi Full')">☕ Lo-fi</div>
+            </div>
         </div>
-        <div class="songbar"></div>
+
+        <div class="main-content">
+            <header>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="globalSearch" placeholder="Search for songs..." data-i18n-placeholder="searchPlaceholder">
+                </div>
+                
+                <div class="profile-container">
+                    <div class="profile-icon" id="profileBtn">
+                        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="User">
+                        <i class="fas fa-caret-down"></i>
+                    </div>
+                    <div class="dropdown-menu" id="profileMenu">
+                        <a href="#" onclick="openModal('upgradeModal')"><span data-i18n="upgrade">Upgrade to Premium</span></a>
+                        <a href="#" onclick="openModal('settingsModal')"><span data-i18n="settings">Settings</span></a>
+                        <hr>
+                        <a href="#" onclick="location.reload()"><span data-i18n="logout">Log out</span></a>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="content-view">
+                <h1 id="viewTitle" data-i18n="trending">Global Featured Tracks</h1>
+                <div id="loader" class="loader" style="display: none;"></div>
+                <div class="song-grid" id="songContainer"></div>
+            </div>
+        </div>
     </div>
 
-    <div class="bottom">
-        <input type="range" name="range" id="myProgressBar" min="0" value="0" max="100">
-        <div class="icons">
-            <!-- fontawesome icons -->
-            <i class="fas fa-3x fa-step-backward"></i>
-            <i class="far fa-3x fa-play-circle" id="masterplay"></i>
-            <i class="fas fa-3x fa-step-forward"></i>
+    <div class="bottom-player">
+        <div class="track-details">
+            <div class="track-img-box">
+                <img src="https://via.placeholder.com/60" id="masterCover" alt="Cover">
+            </div>
+            <div class="meta">
+                <span id="masterTitle" data-i18n="selectSong">Select a song</span>
+                <p id="masterArtist" data-i18n="artist">Artist</p>
+            </div>
         </div>
-        <div class="songInfo">
-             <img src="gif1.jpg" width="42px" alt="" id="gif"> Let me Love You - Vimlesh Yadav
+
+        <div class="player-controls">
+            <div class="main-btns">
+                <i class="fas fa-random"></i>
+                <i class="fas fa-step-backward" id="prev"></i>
+                <i class="far fa-play-circle" id="masterPlay"></i>
+                <i class="fas fa-step-forward" id="next"></i>
+                <i class="fas fa-redo"></i>
+            </div>
+            <div class="seek-container">
+                <span id="currTime">0:00</span>
+                <input type="range" id="progBar" min="0" value="0" step="0.1">
+                <span id="totalTime">0:00</span>
+            </div>
+        </div>
+
+        <div class="right-controls">
+            <i class="fas fa-volume-up" id="muteBtn" style="cursor: pointer; width: 25px;"></i>
+            <input type="range" id="volBar" min="0" max="1" step="0.01" value="0.8">
         </div>
     </div>
-    <script src="https://kit.fontawesome.com/79c3667dd3.js" crossorigin="anonymous"></script>
-    
+
+    <div id="modalOverlay" class="modal-overlay">
+        <div id="settingsModal" class="modal-content">
+            <h2 data-i18n="appSettings">App Settings</h2>
+            <div class="setting-item">
+                <span data-i18n="languageLabel">Display Language</span>
+                <select id="langSelect">
+                    <option value="en">English</option>
+                    <option value="hi">हिन्दी (Hindi)</option>
+                </select>
+            </div>
+            <button class="save-btn" onclick="saveSettings()" data-i18n="saveBtn">Save Changes</button>
+            <button class="close-btn" onclick="closeModal()" data-i18n="cancelBtn">Cancel</button>
+        </div>
+        <div id="upgradeModal" class="modal-content">
+            <h2 data-i18n="getPremium">Spotify Premium</h2>
+            <div class="price-card">₹119 / month</div>
+            <button class="premium-btn-modal" onclick="alert('Payment Method Initialized...')">Upgrade Now</button>
+            <button class="close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
